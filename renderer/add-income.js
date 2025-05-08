@@ -71,11 +71,11 @@ window.addEventListener('DOMContentLoaded', async () => {
             }
         });
         if (entries.length === 0) {
-            alert('⚠️ ยังไม่มีรายการที่กรอกถูกต้อง');
+
             return;
         }
         await window.api.addIncome(entries);
-        alert('✅ บันทึกรายรับเรียบร้อย');
+
         form.reset();
         itemsContainer.innerHTML = '';
         itemsContainer.appendChild(createItemRow());

@@ -1,11 +1,21 @@
 const sqlite3 = require("sqlite3").verbose();
 const path = require("path");
+const fs = require("fs");
+const { app } = require("electron");
+const dbFolder = app.getPath("userData");
+const dbPath = path.join(dbFolder, "app.db");
 
-const dbPath = path.join(__dirname, "app.db");
-const db = new sqlite3.Database(dbPath);
+console.log("📂 Database path:", dbPath);
+
+if (!fs.existsSync(dbPath)) {
+  fs.writeFileSync(dbPath, "");
+}
+
+const db = new sqlite3.Database(dbPath, (err) => {
+  if (err) return console.error("❌ เปิด DB ไม่ได้:", err.message);
+});
 
 db.serialize(() => {
-  // ตารางรายรับ
   db.run(`
     CREATE TABLE IF NOT EXISTS income_entries (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -17,8 +27,6 @@ db.serialize(() => {
       FOREIGN KEY (product_id) REFERENCES products(id)
     )
   `);
-
-  // ตารางสินค้า
   db.run(`
     CREATE TABLE IF NOT EXISTS products (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -29,8 +37,6 @@ db.serialize(() => {
   `, () => {
     console.log("✅ Table created (if not exists)");
   });
-
-  // เพิ่ม mock data ถ้ายังไม่มี
   db.get("SELECT COUNT(*) AS count FROM products", (err, row) => {
     if (err) return console.error(err);
 
