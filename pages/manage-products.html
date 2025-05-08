@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <title>จัดการสินค้า</title>
+</head>
+
+<body>
+    <h1>📦 จัดการสินค้า</h1>
+
+    <form id="product-form">
+        <input type="text" id="name" placeholder="ชื่อสินค้า" required>
+        <input type="number" id="sell" placeholder="ราคาขาย" required>
+        <input type="number" id="cost" placeholder="ราคาทุน" required>
+        <button type="submit">➕ เพิ่มสินค้า</button>
+    </form>
+
+    <ul id="product-list"></ul>
+
+    <button onclick="location.href='index.html'">🏠 กลับหน้า Dashboard</button>
+
+    <script src="../renderer/manage-products.js"></script>
+</body>
+
+</html>

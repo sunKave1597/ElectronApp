@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <meta charset="UTF-8">
+    <title>แดชบอร์ด</title>
+</head>
+
+<body>
+    <h1>📊 แดชบอร์ดรายเดือน</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>เดือน</th>
+                <th>รายรับ (บาท)</th>
+                <th>ต้นทุน (บาท)</th>
+                <th>กำไร (บาท)</th>
+            </tr>
+        </thead>
+        <tbody id="summary-table"></tbody>
+    </table>
+
+    <nav>
+        <button onclick="location.href='add-income.html'">➕ กรอกรายรับ</button>
+        <button onclick="location.href='manage-products.html'">📦 จัดการสินค้า</button>
+    </nav>
+
+    <script src="../renderer/dashboard.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,19 @@
+{
+  "dependencies": {
+    "better-sqlite3": "^11.9.1",
+    "electron": "^36.1.0",
+    "flatpickr": "^4.6.13",
+    "sqlite3": "^5.1.7"
+  },
+  "name": "electronapp",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

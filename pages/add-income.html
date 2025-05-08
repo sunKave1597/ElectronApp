@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>กรอกรายรับ</title>
+        <link rel="stylesheet" href="add-income.css">
+    </head>
+</head>
+
+<body>
+    <h1>💵 กรอกรายรับ</h1>
+    <form id="income-form">
+        <div class="form-top">
+            <label for="date">📅 วันที่:</label>
+            <input type="date" id="date" required>
+            <button type="button" id="add-item-btn">➕ เพิ่มรายการ</button>
+            <button type="submit">💾 บันทึกทั้งหมด</button>
+            <button type="button" style="margin-left: auto;" onclick="location.href='index.html'">🏠 กลับหน้า
+                Dashboard</button>
+        </div>
+        <div class="table-header">
+            <div>สินค้า</div>
+            <div>จำนวน</div>
+            <div>ราคาขาย</div>
+            <div>ราคาทุน</div>
+            <div>ลบ</div>
+        </div>
+        <div id="items-container">
+            <div class="item-row">
+                <select class="product-select" required></select>
+                <input type="number" class="qty" placeholder="จำนวน" required step="any">
+                <input type="number" class="sell-price" placeholder="ราคาขาย" required>
+                <input type="number" class="cost-price" placeholder="ราคาทุน" required>
+                <button type="button" class="remove-item-btn">🗑</button>
+            </div>
+        </div>
+    </form>
+    <script src="../renderer/add-income.js"></script>
+</body>
+
+</html>
