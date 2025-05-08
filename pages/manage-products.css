@@ -1,0 +1,131 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #f4f4f4;
+    padding: 30px;
+}
+
+h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+form {
+    max-width: 1100px;
+    margin: auto;
+    background: #fff;
+    padding: 20px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    overflow-x: auto;
+}
+
+.form-top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.form-top input,
+.form-top button {
+    padding: 10px 12px;
+    font-size: 14px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.form-top button {
+    background: #3498db;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.form-top button:hover {
+    background-color: #2980b9;
+}
+
+/* ✅ ตารางจัดใหม่ให้สวยและไม่เบี้ยว */
+.table-wrapper {
+    overflow-x: auto;
+}
+
+.product-table {
+    width: 100%;
+    min-width: 600px;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 14px;
+    table-layout: fixed;
+}
+
+.product-table thead {
+    background-color: #f1f1f1;
+}
+
+.product-table th,
+.product-table td {
+    padding: 12px 10px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    word-break: break-word;
+}
+
+.product-table th:first-child,
+.product-table td:first-child {
+    text-align: left;
+}
+
+.product-table tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+/* ปุ่มลบ */
+.remove-item-btn {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.remove-item-btn:hover {
+    background: #c0392b;
+}
+
+/* ปุ่มกลับ */
+.bottom-link {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.bottom-link button {
+    background-color: #95a5a6;
+    color: white;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.bottom-link button:hover {
+    background-color: #7f8c8d;
+}
+
+.search-bar {
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.search-bar input {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    width: 250px;
+}

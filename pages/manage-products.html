@@ -4,22 +4,48 @@
 <head>
     <meta charset="UTF-8">
     <title>จัดการสินค้า</title>
+    <link rel="stylesheet" href="manage-products.css">
 </head>
 
 <body>
-    <h1>📦 จัดการสินค้า</h1>
+    <div style="margin-right: 200px;">
+        <h1>📦 จัดการสินค้า</h1>
 
-    <form id="product-form">
-        <input type="text" id="name" placeholder="ชื่อสินค้า" required>
-        <input type="number" id="sell" placeholder="ราคาขาย" required>
-        <input type="number" id="cost" placeholder="ราคาทุน" required>
-        <button type="submit">➕ เพิ่มสินค้า</button>
-    </form>
+        <form id="product-form">
 
-    <ul id="product-list"></ul>
+            <div class="form-top">
+                <input type="text" id="search" placeholder="🔍 ค้นหาชื่อสินค้า...">
 
-    <button onclick="location.href='index.html'">🏠 กลับหน้า Dashboard</button>
+                <input style="justify-content: end;" type="text" id="name" placeholder="ชื่อสินค้า" required>
+                <input type="number" id="sell" placeholder="ราคาขาย" required min="0" step="1">
+                <input type="number" id="cost" placeholder="ราคาทุน" required min="0" step="1">
+                <button type="submit">➕ เพิ่มสินค้า</button>
+            </div>
+            <div class="table-wrapper">
+                <table class="product-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 50%;">ชื่อสินค้า</th>
+                            <th style="width: 15%;">ราคาขาย</th>
+                            <th style="width: 15%;">ราคาทุน</th>
+                            <th style="width: 20%;">การจัดการ</th>
+                        </tr>
+                    </thead>
+                    <tbody id="product-list">
+                    </tbody>
+                </table>
+            </div>
 
+        </form>
+        <div id="sidebar-placeholder"></div>
+    </div>
+    <script>
+        fetch('../nav.html')
+            .then(res => res.text())
+            .then(html => {
+                document.getElementById('sidebar-placeholder').innerHTML = html;
+            });
+    </script>
     <script src="../renderer/manage-products.js"></script>
 </body>
 

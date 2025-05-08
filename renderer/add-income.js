@@ -32,22 +32,16 @@ window.addEventListener('DOMContentLoaded', async () => {
         const select = item.querySelector('.product-select');
         const sellInput = item.querySelector('.sell-price');
         const costInput = item.querySelector('.cost-price');
-
-        // Autofill ตอนเลือก
         select.addEventListener('change', () => {
             const selected = select.options[select.selectedIndex];
             sellInput.value = selected.dataset.sell;
             costInput.value = selected.dataset.cost;
         });
-
-        // Autofill ทันทีตอนสร้าง
         const selected = select.options[select.selectedIndex];
         if (selected) {
             sellInput.value = selected.dataset.sell;
             costInput.value = selected.dataset.cost;
         }
-
-        // ปุ่มลบ
         const removeBtn = item.querySelector('.remove-item-btn');
         removeBtn.addEventListener('click', () => {
             const allRows = itemsContainer.querySelectorAll('.item-row');
@@ -58,44 +52,30 @@ window.addEventListener('DOMContentLoaded', async () => {
             }
         });
     }
-
-    // โหลดเริ่มต้น
     itemsContainer.innerHTML = '';
     itemsContainer.appendChild(createItemRow());
-
-    // เพิ่มแถว
     addBtn.addEventListener('click', () => {
         itemsContainer.appendChild(createItemRow());
     });
-
-    // บันทึก
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
-
         const date = dateInput.value;
         const entries = [];
-
         document.querySelectorAll('.item-row').forEach(item => {
             const product_id = parseInt(item.querySelector('.product-select').value);
             const quantity = parseInt(item.querySelector('.qty').value);
             const sell_price = parseInt(item.querySelector('.sell-price').value);
             const cost_price = parseInt(item.querySelector('.cost-price').value);
-
             if (!isNaN(product_id) && quantity > 0) {
                 entries.push({ date, product_id, quantity, sell_price, cost_price });
             }
         });
-
         if (entries.length === 0) {
             alert('⚠️ ยังไม่มีรายการที่กรอกถูกต้อง');
             return;
         }
-
         await window.api.addIncome(entries);
-
-
         alert('✅ บันทึกรายรับเรียบร้อย');
-
         form.reset();
         itemsContainer.innerHTML = '';
         itemsContainer.appendChild(createItemRow());

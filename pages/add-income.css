@@ -105,3 +105,32 @@ form {
 .bottom-link button:hover {
     background-color: #7f8c8d;
 }
+.date-input {
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    width: 200px;
+    box-sizing: border-box;
+    background-color: white;
+    transition: border-color 0.2s;
+}
+
+.date-input:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+.flatpickr-calendar {
+    font-family: 'Segoe UI', sans-serif;
+    z-index: 9999;
+
+}
+
+.flatpickr-day.selected,
+.flatpickr-day.startRange,
+.flatpickr-day.endRange {
+    background: #3498db;
+    color: #fff;
+    border-color: #2980b9;
+}

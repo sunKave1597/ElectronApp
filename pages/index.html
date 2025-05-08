@@ -26,7 +26,15 @@
         <button onclick="location.href='add-income.html'">➕ กรอกรายรับ</button>
         <button onclick="location.href='manage-products.html'">📦 จัดการสินค้า</button>
     </nav>
+    <div id="sidebar-placeholder"></div>
 
+    <script>
+        fetch('../nav.html')
+            .then(res => res.text())
+            .then(html => {
+                document.getElementById('sidebar-placeholder').innerHTML = html;
+            });
+    </script>
     <script src="../renderer/dashboard.js"></script>
 </body>
 
