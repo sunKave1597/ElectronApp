@@ -1,0 +1,165 @@
+:root {
+    --primary: #2c3e50;
+    --accent: #3498db;
+    --accent-light: #5dade2;
+    --success: #2ecc71;
+    --success-dark: #27ae60;
+    --card-bg: #ffffff;
+    --border-color: #e0e0e0;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f4f6f9;
+    padding: 30px;
+    color: var(--primary);
+    line-height: 1.6;
+}
+
+h1 {
+    text-align: center;
+    color: var(--primary);
+    margin-bottom: 30px;
+    font-size: 28px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 30px;
+    background: var(--card-bg);
+    box-shadow: var(--shadow);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+th,
+td {
+    padding: 14px 16px;
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+}
+
+th {
+    background-color: var(--accent);
+    color: white;
+    font-weight: 600;
+}
+
+td {
+    background-color: #fff;
+}
+
+.card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    margin-bottom: 40px;
+    padding: 15px;
+
+}
+
+.card-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 12px;
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+input[type="month"] {
+    padding: 8px 12px;
+    font-size: 15px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background-color: #fff;
+    color: var(--primary);
+}
+
+button {
+    padding: 10px 18px;
+    background-color: var(--success);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+button:hover {
+    background-color: var(--success-dark);
+}
+
+.chart-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.chart-col {
+    flex: 1 1 30%;
+    background: #fdfdfd;
+    padding: 16px;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 250px;
+}
+
+.chart-col canvas,
+.card canvas {
+    width: 100% !important;
+    height: 280px !important;
+}
+
+canvas {
+    display: block;
+}
+.card-row {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.card-row .card {
+    flex-grow: 1;
+    flex-basis: 0;
+}
+
+.card-row .card:first-child {
+    flex: 2;
+}
+
+.card-row .card:last-child {
+    flex: 1;
+}
+.flatpickr-month {
+    height: 34px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    width: 100px;
+    box-sizing: border-box;
+    background-color: white;
+    transition: border-color 0.2s;
+}
+
+.flatpickr-month:focus {
+    border-color: #3498db;
+    outline: none;
+}
