@@ -148,6 +148,7 @@ td {
     border: 1px solid #ccc;
     text-align: center;
 }
+
 #toast {
     position: fixed;
     top: 20px;
@@ -167,6 +168,7 @@ td {
         transform: translateX(0%) translateY(-20px);
         opacity: 0;
     }
+
     to {
         transform: translateX(0%) translateY(0);
         opacity: 1;
@@ -196,4 +198,17 @@ button[type="submit"] {
 
 button[type="submit"]:hover {
     background-color: #3498db;
+}
+
+#toast {
+    display: none;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 4px;
+    z-index: 9999;
+    pointer-events: none;
 }
