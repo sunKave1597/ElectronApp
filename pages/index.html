@@ -1,98 +1,118 @@
 <!DOCTYPE html>
 <html lang="th">
-
-<head>
-    <link rel="stylesheet" href="../assest/flatpickr/dist/flatpickr.min.css">
+  <head>
+    <link rel="stylesheet" href="../assest/flatpickr/dist/flatpickr.min.css" />
     <script src="../assest/flatpickr/dist/flatpickr.min.js"></script>
     <script src="../assest/flatpickr/dist/plugins/monthSelect/index.js"></script>
-    <link rel="stylesheet" href="../assest/flatpickr/dist/plugins/monthSelect/style.css">
+    <link
+      rel="stylesheet"
+      href="../assest/flatpickr/dist/plugins/monthSelect/style.css"
+    />
     <script src="../assest/flatpickr/dist/l10n/th.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>แดชบอร์ด</title>
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="index.css" />
     <style>
-        input[type="hidden"].flatpickr-hidden {
-            display: none !important;
-        }
+      input[type="hidden"].flatpickr-hidden {
+        display: none !important;
+      }
     </style>
-</head>
+  </head>
 
-<body>
-    <div style="margin-right: 200px;">
-        <div class="card-row">
-            <div class="card" style="background-color: rgb(197, 226, 217);">
-                <div class="" style="font-size: 20px;">รายได้ทั้งเดือน</div>
-                <div id="card-income-value" style="font-size: 42px; font-weight: bold;">0 บาท</div>
-            </div>
-            <div class="card" style="background-color: rgb(203, 218, 213);">
-                <div class="" style="font-size: 20px;">กำไร</div>
-                <div id="card-profit-value" style="font-size: 32px; font-weight: bold;">0 บาท</div>
-            </div>
-            <div class="card" style="background-color: rgb(203, 218, 213);">
-                <div class="" style="font-size: 20px;">ทุน</div>
-                <div id="card-cost-value" style="font-size: 32px; font-weight: bold;">0 บาท</div>
-            </div>
+  <body>
+    <div style="margin-right: 200px">
+      <div class="card-row">
+        <div class="card" style="background-color: rgb(197, 226, 217)">
+          <div class="" style="font-size: 20px">รายได้ทั้งเดือน</div>
+          <div
+            id="card-income-value"
+            style="font-size: 42px; font-weight: bold"
+          >
+            0 บาท
+          </div>
+        </div>
+        <div class="card" style="background-color: rgb(203, 218, 213)">
+          <div class="" style="font-size: 20px">กำไร</div>
+          <div
+            id="card-profit-value"
+            style="font-size: 32px; font-weight: bold"
+          >
+            0 บาท
+          </div>
+        </div>
+        <div class="card" style="background-color: rgb(203, 218, 213)">
+          <div class="" style="font-size: 20px">ทุน</div>
+          <div id="card-cost-value" style="font-size: 32px; font-weight: bold">
+            0 บาท
+          </div>
+        </div>
 
-            <div class="card" style="background-color: rgb(197, 226, 217);">
-                <div class="" style="font-size: 20px;">เลือกเดือน</div>
-                <input type="text" id="monthPicker" class="flatpickr-month">
-            </div>
+        <div class="card" style="background-color: rgb(197, 226, 217)">
+          <div class="" style="font-size: 20px">เลือกเดือน</div>
+          <input type="text" id="monthPicker" class="flatpickr-month" />
         </div>
-        <div class="card-row">
-            <div class="card">
-                <div class="chart-row">
-                    <h4>📈 รายได้รายวันของเดือนที่เลือก</h4>
-                    <canvas id="dailyChart"></canvas>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header">
-                    <div class="controls">
-                        <h4>📈 อัตราส่วนสินค้าที่ขายได้</h4>
-                    </div>
-                </div>
-                <div class="chart-row"
-                    style="justify-content: center; max-width: 400px; max-height: 400px; width: 100%; height: 100%;">
-                    <canvas id="topProductChart"></canvas>
-                </div>
-            </div>
+      </div>
+      <div class="card-row">
+        <div class="card">
+          <div class="chart-row">
+            <h4>📈 รายได้รายวันของเดือนที่เลือก</h4>
+            <canvas id="dailyChart"></canvas>
+          </div>
         </div>
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>เดือน</th>
-                    <th>รายรับ (บาท)</th>
-                    <th>กำไร (บาท)</th>
-                </tr>
-            </thead>
-            <tbody id="summary-table"></tbody>
-        </table>
+        <div class="card">
+          <div class="card-header">
+            <div class="controls">
+              <h4>📈 อัตราส่วนสินค้าที่ขายได้</h4>
+            </div>
+          </div>
+          <div
+            class="chart-row"
+            style="
+              justify-content: center;
+              max-width: 400px;
+              max-height: 400px;
+              width: 100%;
+              height: 100%;
+            "
+          >
+            <canvas id="topProductChart"></canvas>
+          </div>
+        </div>
+      </div>
+      <table border="1">
+        <thead>
+          <tr>
+            <th>เดือน</th>
+            <th>รายรับ (บาท)</th>
+            <th>กำไร (บาท)</th>
+          </tr>
+        </thead>
+        <tbody id="summary-table"></tbody>
+      </table>
     </div>
-
+    <div id="toast"></div>
     <div id="sidebar-placeholder"></div>
 
     <script>
-        fetch('../nav.html')
-            .then(res => res.text())
-            .then(html => {
-                document.getElementById('sidebar-placeholder').innerHTML = html;
-            });
-
-        flatpickr("#monthPicker", {
-            locale: "th",
-            plugins: [
-                new monthSelectPlugin({
-                    shorthand: false,
-                    dateFormat: "Y-m",
-                    altFormat: "F Y",
-                    allowInput: false
-
-                })
-            ]
+      fetch("../nav.html")
+        .then((res) => res.text())
+        .then((html) => {
+          document.getElementById("sidebar-placeholder").innerHTML = html;
         });
+
+      flatpickr("#monthPicker", {
+        locale: "th",
+        plugins: [
+          new monthSelectPlugin({
+            shorthand: false,
+            dateFormat: "Y-m",
+            altFormat: "F Y",
+            allowInput: false,
+          }),
+        ],
+      });
     </script>
     <script src="../renderer/dashboard.js"></script>
-</body>
-
+  </body>
 </html>
