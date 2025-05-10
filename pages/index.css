@@ -24,32 +24,6 @@ h1 {
     font-size: 28px;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 30px;
-    background: var(--card-bg);
-    box-shadow: var(--shadow);
-    border-radius: 12px;
-    overflow: hidden;
-}
-
-th,
-td {
-    padding: 14px 16px;
-    text-align: center;
-    border-bottom: 1px solid var(--border-color);
-}
-
-th {
-    background-color: var(--accent);
-    color: white;
-    font-weight: 600;
-}
-
-td {
-    background-color: #fff;
-}
 
 .card {
     background: var(--card-bg);
@@ -173,16 +147,32 @@ canvas {
     background-color: #ffffff;
     box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.2);
 }
+.flatpickr-month:hover {
+    background-color: #f0f8f1;
+    box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.2);
+}
 
-#toast {
-    display: none;
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background-color: #34495e;
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 4px;
-    z-index: 9999;
-    pointer-events: none;
+.table-scroll {
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 8px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+thead th {
+    position: sticky;
+    top: 0;
+    background-color: rgb(203, 218, 213);;
+    z-index: 1;
 }

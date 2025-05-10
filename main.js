@@ -188,7 +188,6 @@ handleIpc('get-top-products', (_, { month }) => {
             ORDER BY quantity DESC
         `, [start, end], (err, rows) => {
             if (err) return reject(err);
-            console.log("📦 Top Products:", rows);
             resolve(rows);
         });
     });
@@ -199,13 +198,28 @@ ipcMain.handle('get-income-entries', async (event, month) => {
     const where = month ? `WHERE date LIKE '${month}%'` : '';
     const sql = `SELECT * FROM income_entries ${where} ORDER BY date DESC`;
 
+    console.log("📄 SQL:", sql); // ตรวจดูว่า query ถูก
     return new Promise((resolve, reject) => {
         db.all(sql, (err, rows) => {
             if (err) {
-                console.error('DB ERROR:', err);
+                console.error("❌ Query error:", err);
                 reject(err);
             } else {
+                console.log("📥 Rows:", rows);
                 resolve(rows);
+            }
+        });
+    });
+});
+
+ipcMain.handle('delete-income-entry', async (event, id) => {
+    return new Promise((resolve, reject) => {
+        db.run(`DELETE FROM income_entries WHERE id = ?`, [id], function (err) {
+            if (err) {
+                console.error("❌ ลบไม่สำเร็จ:", err);
+                reject(err);
+            } else {
+                resolve();
             }
         });
     });

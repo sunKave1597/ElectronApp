@@ -33,12 +33,16 @@ async function loadCharts(month) {
   const selectedMonthData = monthlySummary.find(row => row.label === month) || {
     income: 0, cost: 0, profit: 0
   };
-  document.getElementById('card-income-value').textContent = `${selectedMonthData.income.toLocaleString()} บาท`;
-  document.getElementById('card-profit-value').textContent = `${selectedMonthData.profit.toLocaleString()} บาท`;
-  document.getElementById('card-cost-value').textContent = `${selectedMonthData.cost.toLocaleString()} บาท`;
-
+  document.getElementById('card-income-value').textContent =
+    `${selectedMonthData.income.toLocaleString()} บาท`;
+  document.getElementById('card-cost-value').textContent =
+    `${selectedMonthData.cost.toLocaleString()} บาท`;
+  const profitElem = document.getElementById('card-profit-value');
+  profitElem.textContent = `${selectedMonthData.profit.toLocaleString()} บาท`;
+  profitElem.style.color = selectedMonthData.profit < 0 ? 'red' : 'green';
   drawLineChart('dailyChart', dailySummary, 'รายวัน');
 }
+
 
 function drawLineChart(canvasId, data, label) {
   const ctx = document.getElementById(canvasId).getContext('2d');

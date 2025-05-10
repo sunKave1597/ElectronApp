@@ -8,6 +8,8 @@ contextBridge.exposeInMainWorld('api', {
     getSummary: () => ipcRenderer.invoke('get-summary'),
     getDashboardData: (month) => ipcRenderer.invoke('get-dashboard-data', { month }),
     getTopProducts: (month) => ipcRenderer.invoke('get-top-products', { month }),
-    saveMonthlyCost: (month, cost_total) => ipcRenderer.invoke('save-monthly-cost', { month, cost_total })
+    saveMonthlyCost: (month, cost_total) => ipcRenderer.invoke('save-monthly-cost', { month, cost_total }),
+    getIncomeEntries: (month) => ipcRenderer.invoke('get-income-entries', month),
+    deleteIncomeEntry: (id) => ipcRenderer.invoke('delete-income-entry', id)
 
 });
