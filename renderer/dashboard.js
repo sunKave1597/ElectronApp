@@ -1,4 +1,4 @@
-let currentChartType = 'income'; // 'income', 'cost', 'profit'
+let currentChartType = 'income';
 
 window.addEventListener('DOMContentLoaded', async () => {
   const table = document.getElementById('summary-table');
@@ -9,33 +9,19 @@ window.addEventListener('DOMContentLoaded', async () => {
     tr.innerHTML = `
       <td>${row.month}</td>
       <td>${row.total_revenue} ฿</td>
-      <td>${row.total_cost} ฿</td>
       <td>${row.profit} ฿</td>
     `;
     table.appendChild(tr);
   });
 
-  // ตั้งเดือนปัจจุบันให้กับทั้งสอง picker
   const now = new Date();
   const currentMonth = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
 
   const monthPicker = document.getElementById('monthPicker');
   monthPicker.value = currentMonth;
   loadCharts(currentMonth);
-
-  const topProductPicker = document.getElementById('topProductMonthPicker');
-  topProductPicker.value = currentMonth;
   loadTopProductChart(currentMonth);
 });
-
-function toggleChartType() {
-  if (currentChartType === 'income') currentChartType = 'cost';
-  else if (currentChartType === 'cost') currentChartType = 'profit';
-  else currentChartType = 'income';
-
-  const month = document.getElementById('monthPicker').value;
-  loadCharts(month);
-}
 
 document.getElementById('monthPicker').addEventListener('change', (e) => {
   loadCharts(e.target.value);
@@ -43,30 +29,41 @@ document.getElementById('monthPicker').addEventListener('change', (e) => {
 
 async function loadCharts(month) {
   const { monthlySummary, dailySummary } = await window.api.getDashboardData(month);
-  drawChart('monthlyChart', monthlySummary, 'รายเดือน');
-  drawChart('dailyChart', dailySummary, 'รายวัน');
+
+  const selectedMonthData = monthlySummary.find(row => row.label === month) || {
+    income: 0, cost: 0, profit: 0
+  };
+  document.getElementById('card-income-value').textContent = `${selectedMonthData.income.toLocaleString()} บาท`;
+  document.getElementById('card-profit-value').textContent = `${selectedMonthData.profit.toLocaleString()} บาท`;
+  document.getElementById('card-cost-value').textContent = `${selectedMonthData.cost.toLocaleString()} บาท`;
+
+  drawLineChart('dailyChart', dailySummary, 'รายวัน');
 }
 
-function drawChart(canvasId, data, label) {
+function drawLineChart(canvasId, data, label) {
   const ctx = document.getElementById(canvasId).getContext('2d');
 
   if (window[canvasId] && typeof window[canvasId].destroy === 'function') {
     window[canvasId].destroy();
   }
 
-  const labels = data.map(row => row.label);
-  const values = data.map(row => row[currentChartType]);
+  const chartData = data.map(row => ({
+    x: Number(row.label),
+    y: row[currentChartType] || 0
+  }));
 
   window[canvasId] = new Chart(ctx, {
-    type: 'bar',
+    type: 'line',
     data: {
-      labels: labels,
       datasets: [{
         label: `${label} (${currentChartType})`,
-        data: values,
-        backgroundColor: 'rgba(46, 204, 113, 0.5)',
+        data: chartData,
         borderColor: 'rgba(46, 204, 113, 1)',
-        borderWidth: 2
+        backgroundColor: 'rgba(46, 204, 113, 0.2)',
+        tension: 0.3,
+        fill: true,
+        pointRadius: 5,
+        pointHoverRadius: 7
       }]
     },
     options: {
@@ -76,20 +73,28 @@ function drawChart(canvasId, data, label) {
         legend: { position: 'top' }
       },
       scales: {
+        x: {
+          type: 'linear',
+          title: {
+            display: true,
+            text: 'วันในเดือน'
+          },
+          min: 1,
+          max: 31,
+          ticks: {
+            stepSize: 1,
+            callback: value => `${value}`
+          }
+        },
         y: {
           beginAtZero: true,
-          ticks: { font: { size: 14 } }
-        },
-        x: {
           ticks: { font: { size: 14 } }
         }
       }
     }
   });
 }
-document.getElementById('topProductMonthPicker').addEventListener('change', (e) => {
-  loadTopProductChart(e.target.value);
-});
+
 
 async function loadTopProductChart(month) {
   const data = await window.api.getTopProducts(month);
@@ -111,7 +116,6 @@ function drawTopProductPie(canvasId, data) {
     data: {
       labels: labels,
       datasets: [{
-        label: 'สินค้าขายดี',
         data: values,
         backgroundColor: [
           '#FF6384', '#36A2EB', '#FFCE56',
@@ -138,4 +142,5 @@ function drawTopProductPie(canvasId, data) {
       }
     }
   });
+
 }
