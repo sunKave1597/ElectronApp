@@ -105,6 +105,7 @@ form {
 .bottom-link button:hover {
     background-color: #7f8c8d;
 }
+
 .date-input {
     padding: 10px 12px;
     border: 1px solid #ccc;
@@ -134,6 +135,7 @@ form {
     color: #fff;
     border-color: #2980b9;
 }
+
 button[type="sb"] {
     background-color: #2ecc71;
     color: white;
@@ -144,6 +146,20 @@ button[type="sb"] {
     cursor: pointer;
     transition: background-color 0.3s;
 }
+
 button[type="sb"]:hover {
     background-color: #27ae60;
+}
+
+#toast {
+    display: none;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 4px;
+    z-index: 9999;
+    pointer-events: none;
 }
