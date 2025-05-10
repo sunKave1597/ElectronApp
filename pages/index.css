@@ -129,6 +129,7 @@ button:hover {
 canvas {
     display: block;
 }
+
 .card-row {
     display: flex;
     gap: 20px;
@@ -171,4 +172,17 @@ canvas {
     border-color: #27ae60;
     background-color: #ffffff;
     box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.2);
+}
+
+#toast {
+    display: none;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #34495e;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 4px;
+    z-index: 9999;
+    pointer-events: none;
 }

@@ -2,19 +2,20 @@
 <html lang="th">
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>กรอกรายรับ</title>
-    <link rel="stylesheet" href="add-income.css">
-    <link rel="stylesheet" href="../assest/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="add-income.css" />
+    <link rel="stylesheet" href="../assest/flatpickr/dist/flatpickr.min.css" />
     <script src="../assest/flatpickr/dist/flatpickr.min.js"></script>
     <script src="../assest/flatpickr/dist/plugins/monthSelect/index.js"></script>
-    <link rel="stylesheet" href="../assest/flatpickr/dist/plugins/monthSelect/style.css">
+    <link rel="stylesheet" href="../assest/flatpickr/dist/plugins/monthSelect/style.css" />
     <script src="../assest/flatpickr/dist/l10n/th.js"></script>
     <style>
         input[type="hidden"].flatpickr-hidden {
             display: none !important;
         }
     </style>
+</head>
 
 
 </head>
@@ -71,10 +72,10 @@
 
     <div id="sidebar-placeholder"></div>
     <script>
-        fetch('../nav.html')
-            .then(res => res.text())
-            .then(html => {
-                document.getElementById('sidebar-placeholder').innerHTML = html;
+        fetch("../nav.html")
+            .then((res) => res.text())
+            .then((html) => {
+                document.getElementById("sidebar-placeholder").innerHTML = html;
             });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>

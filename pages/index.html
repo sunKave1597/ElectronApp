@@ -2,15 +2,15 @@
 <html lang="th">
 
 <head>
-    <link rel="stylesheet" href="../assest/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="../assest/flatpickr/dist/flatpickr.min.css" />
     <script src="../assest/flatpickr/dist/flatpickr.min.js"></script>
     <script src="../assest/flatpickr/dist/plugins/monthSelect/index.js"></script>
-    <link rel="stylesheet" href="../assest/flatpickr/dist/plugins/monthSelect/style.css">
+    <link rel="stylesheet" href="../assest/flatpickr/dist/plugins/monthSelect/style.css" />
     <script src="../assest/flatpickr/dist/l10n/th.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>แดชบอร์ด</title>
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="index.css" />
     <style>
         input[type="hidden"].flatpickr-hidden {
             display: none !important;
@@ -45,9 +45,9 @@
                 <div id="card-cost-value" style="font-size: 32px; font-weight: bold;">0 บาท</div>
             </div>
 
-            <div class="card" style="background-color: rgb(197, 226, 217);">
-                <div class="" style="font-size: 20px;">เลือกเดือน</div>
-                <input type="text" id="monthPicker" class="flatpickr-month">
+            <div class="card" style="background-color: rgb(197, 226, 217)">
+                <div class="" style="font-size: 20px">เลือกเดือน</div>
+                <input type="text" id="monthPicker" class="flatpickr-month" />
             </div>
         </div>
         <div class="card-row">
@@ -63,8 +63,13 @@
                         <h4>📈 อัตราส่วนสินค้าที่ขายได้</h4>
                     </div>
                 </div>
-                <div class="chart-row"
-                    style="justify-content: center; max-width: 400px; max-height: 400px; width: 100%; height: 100%;">
+                <div class="chart-row" style="
+              justify-content: center;
+              max-width: 400px;
+              max-height: 400px;
+              width: 100%;
+              height: 100%;
+            ">
                     <canvas id="topProductChart"></canvas>
                 </div>
             </div>
@@ -80,14 +85,14 @@
             <tbody id="summary-table"></tbody>
         </table>
     </div>
-
+    <div id="toast"></div>
     <div id="sidebar-placeholder"></div>
 
     <script>
-        fetch('../nav.html')
-            .then(res => res.text())
-            .then(html => {
-                document.getElementById('sidebar-placeholder').innerHTML = html;
+        fetch("../nav.html")
+            .then((res) => res.text())
+            .then((html) => {
+                document.getElementById("sidebar-placeholder").innerHTML = html;
             });
 
         flatpickr("#monthPicker", {
@@ -97,10 +102,9 @@
                     shorthand: false,
                     dateFormat: "Y-m",
                     altFormat: "F Y",
-                    allowInput: false
-
-                })
-            ]
+                    allowInput: false,
+                }),
+            ],
         });
     </script>
     <script src="../renderer/dashboard.js"></script>
