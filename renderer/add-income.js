@@ -30,7 +30,6 @@ window.addEventListener('DOMContentLoaded', async () => {
         const select = item.querySelector('.product-select');
         const sellInput = item.querySelector('.sell-price');
 
-        // ตั้งค่าเริ่มต้นให้แสดงราคาขายของรายการแรก
         const selected = select.options[select.selectedIndex];
         if (selected && selected.dataset.sell) {
             sellInput.value = selected.dataset.sell;
@@ -52,13 +51,11 @@ window.addEventListener('DOMContentLoaded', async () => {
     }
 
     function clearForm() {
-        // manual clear แทน form.reset()
         dateInput.value = '';
         itemsContainer.innerHTML = '';
         itemsContainer.appendChild(createItemRow());
     }
 
-    // เริ่มจากแถวเดียว
     clearForm();
 
     addBtn.addEventListener('click', () => {
@@ -94,11 +91,46 @@ window.addEventListener('DOMContentLoaded', async () => {
 
         try {
             await window.api.addIncome(entries);
-            alert('✅ บันทึกรายการเรียบร้อย');
+            showToast("✅ บันทึกเรียบร้อย");
             clearForm();
         } catch (err) {
             console.error('❌ เกิดข้อผิดพลาดในการบันทึก:', err);
             alert('❌ เกิดข้อผิดพลาดในการบันทึก');
         }
     });
+
+    function showToast(message) {
+        toast.textContent = message;
+        toast.style.display = 'block';
+        setTimeout(() => {
+            toast.style.display = 'none';
+        }, 2000);
+    }
+
+    async function loadIncomeHistory(month = null) {
+        const rows = await window.api.getIncomeEntries(month);
+        const table = document.getElementById("history-table");
+        table.innerHTML = "";
+
+        rows.forEach(row => {
+            const total = row.quantity * row.sell_price;
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+                <td>${row.date}</td>
+                <td>${row.product_name}</td>
+                <td>${row.quantity}</td>
+                <td>${row.sell_price}</td>
+                <td>${total}</td>
+            `;
+            table.appendChild(tr);
+        });
+    }
+
+    document.getElementById("month-filter").addEventListener("change", (e) => {
+        const value = e.target.value;
+        loadIncomeHistory(value);
+    });
+
+    loadIncomeHistory();
+
 });

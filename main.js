@@ -15,7 +15,6 @@ function createWindow() {
     });
     win.setMenu(null);
     win.loadFile('pages/index.html');
-    win.webContents.openDevTools();
 }
 
 app.whenReady().then(createWindow);
@@ -180,4 +179,20 @@ ipcMain.handle('get-top-products', async (event, { month }) => {
     });
 });
 
+
+ipcMain.handle('get-income-entries', async (event, month) => {
+    const where = month ? `WHERE date LIKE '${month}%'` : '';
+    const sql = `SELECT * FROM income_entries ${where} ORDER BY date DESC`;
+
+    return new Promise((resolve, reject) => {
+        db.all(sql, (err, rows) => {
+            if (err) {
+                console.error('DB ERROR:', err);
+                reject(err);
+            } else {
+                resolve(rows);
+            }
+        });
+    });
+});
 

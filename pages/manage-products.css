@@ -1,6 +1,6 @@
 body {
     font-family: 'Segoe UI', sans-serif;
-    background: #f4f4f4;
+    background: #f4f6f9;
     padding: 30px;
 }
 
@@ -153,7 +153,7 @@ button[type="submit"] {
     box-shadow: var(--shadow);
     margin-bottom: 40px;
     padding: 30px;
-
+    margin: auto;
 }
 :root {
     --primary: #2c3e50;

@@ -27,7 +27,18 @@
             </div>
             <div class="card" style="background-color: rgb(203, 218, 213);">
                 <div class="" style="font-size: 20px;">กำไร</div>
-                <div id="card-profit-value" style="font-size: 32px; font-weight: bold;">0 บาท</div>
+                <div id="card-profit-value" style="font-size: 32px; font-weight: bold; color: green;">0 บาท</div>
+                <script>
+                    function updateProfitValue(value) {
+                        const profitElem = document.getElementById('card-profit-value');
+                        profitElem.textContent = value + ' บาท';
+                        if (parseFloat(value) < 0) {
+                            profitElem.style.color = 'red';
+                        } else {
+                            profitElem.style.color = 'green';
+                        }
+                    }
+                </script>
             </div>
             <div class="card" style="background-color: rgb(203, 218, 213);">
                 <div class="" style="font-size: 20px;">ทุน</div>

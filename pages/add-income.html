@@ -21,6 +21,8 @@
 
 <body>
     <div style="margin-right: 200px;">
+        <div id="toast">บันทึกเรียบร้อยแล้ว</div>
+
         <h1>💵 กรอกรายรับ</h1>
         <form id="income-form">
             <div class="form-top">
@@ -45,6 +47,27 @@
             </div>
         </form>
     </div>
+    <div class="card" style="margin-right: 200px;">
+        <div class="card-header">
+            <h2>📊 ข้อมูลรายรับย้อนหลัง</h2>
+            <input type="text" id="month-filter" placeholder="เลือกเดือน" class="date-input" />
+        </div>
+        <div class="card-body">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>วันที่</th>
+                        <th>สินค้า</th>
+                        <th>จำนวน</th>
+                        <th>ราคาขาย</th>
+                        <th>รวม</th>
+                    </tr>
+                </thead>
+                <tbody id="history-table">
+                </tbody>
+            </table>
+        </div>
+    </div>
 
     <div id="sidebar-placeholder"></div>
     <script>
@@ -60,6 +83,10 @@
         flatpickr("#date", {
             dateFormat: "Y-m-d",
             defaultDate: "today",
+            locale: "th"
+        });
+        flatpickr("#month-filter", {
+            plugins: [new monthSelectPlugin({ shorthand: true, dateFormat: "Y-m", altFormat: "F Y" })],
             locale: "th"
         });
     </script>

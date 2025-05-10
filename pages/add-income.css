@@ -1,6 +1,6 @@
 body {
     font-family: 'Segoe UI', sans-serif;
-    background: #f4f4f4;
+    background: #f4f6f9;
     padding: 30px;
 }
 
@@ -146,4 +146,60 @@ button[type="sb"] {
 }
 button[type="sb"]:hover {
     background-color: #27ae60;
+}
+#toast {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background: #2ecc71;
+    color: white;
+    padding: 20px 30px;
+    font-size: 30px;
+    border-radius: 10px;
+    display: none;
+    z-index: 9999;
+    animation: slide-down 0.5s ease-out;
+}
+
+@keyframes slide-down {
+    from {
+        transform: translateX(0%) translateY(-20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0%) translateY(0);
+        opacity: 1;
+    }
+}
+.card {
+    margin-top: 40px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.data-table th,
+.data-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+.data-table th {
+    background-color: #f1f1f1;
+    font-weight: bold;
 }

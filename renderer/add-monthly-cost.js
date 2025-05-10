@@ -10,10 +10,6 @@ window.addEventListener('DOMContentLoaded', () => {
         const month = monthInput.value;
         const cost = parseFloat(costInput.value);
 
-        if (!month || isNaN(cost) || cost < 0) {
-            alert('กรุณากรอกข้อมูลให้ครบถ้วนและถูกต้อง');
-            return;
-        }
 
         try {
             await window.api.saveMonthlyCost(month, cost);
