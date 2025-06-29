@@ -1,48 +1,69 @@
 let currentChartType = 'income';
 
 window.addEventListener('DOMContentLoaded', async () => {
-  const table = document.getElementById('summary-table');
-  const rows = await window.api.getSummary();
-
-  rows.forEach(row => {
-    const tr = document.createElement('tr');
-    tr.innerHTML = `
-      <td>${row.month}</td>
-      <td>${row.total_revenue} ฿</td>
-      <td>${row.profit} ฿</td>
-    `;
-    table.appendChild(tr);
-  });
-
   const now = new Date();
   const currentMonth = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
 
   const monthPicker = document.getElementById('monthPicker');
   monthPicker.value = currentMonth;
+
+  await renderSummaryTable(currentMonth);     
   loadCharts(currentMonth);
   loadTopProductChart(currentMonth);
 });
 
 document.getElementById('monthPicker').addEventListener('change', (e) => {
-  loadCharts(e.target.value);
+  const selectedMonth = e.target.value;
+  renderSummaryTable(selectedMonth);
+  loadCharts(selectedMonth);
+  loadTopProductChart(selectedMonth);
 });
+
+async function renderSummaryTable(selectedMonth) {
+  const table = document.getElementById('summary-table');
+  const rows = await window.api.getSummary(); 
+
+  table.innerHTML = ''; 
+
+  const row = rows.find(r => r.month === selectedMonth);
+  if (row) {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${row.month}</td>
+      <td>${row.total_revenue.toLocaleString()} ฿</td>
+      <td>${row.total_cost.toLocaleString()} ฿</td>
+      <td style="color:${row.profit < 0 ? 'red' : 'green'}">
+        ${row.profit.toLocaleString()} ฿
+      </td>
+    `;
+    table.appendChild(tr);
+  } else {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td colspan="4">ไม่มีข้อมูลของเดือนนี้</td>`;
+    table.appendChild(tr);
+  }
+}
 
 async function loadCharts(month) {
   const { monthlySummary, dailySummary } = await window.api.getDashboardData(month);
 
   const selectedMonthData = monthlySummary.find(row => row.label === month) || {
-    income: 0, cost: 0, profit: 0
+    income: 0,
+    cost: 0,
+    profit: 0
   };
+
   document.getElementById('card-income-value').textContent =
     `${selectedMonthData.income.toLocaleString()} บาท`;
   document.getElementById('card-cost-value').textContent =
     `${selectedMonthData.cost.toLocaleString()} บาท`;
+
   const profitElem = document.getElementById('card-profit-value');
   profitElem.textContent = `${selectedMonthData.profit.toLocaleString()} บาท`;
   profitElem.style.color = selectedMonthData.profit < 0 ? 'red' : 'green';
+
   drawLineChart('dailyChart', dailySummary, 'รายวัน');
 }
-
 
 function drawLineChart(canvasId, data, label) {
   const ctx = document.getElementById(canvasId).getContext('2d');
@@ -99,7 +120,6 @@ function drawLineChart(canvasId, data, label) {
   });
 }
 
-
 async function loadTopProductChart(month) {
   const data = await window.api.getTopProducts(month);
   drawTopProductPie('topProductChart', data);
@@ -146,5 +166,4 @@ function drawTopProductPie(canvasId, data) {
       }
     }
   });
-
 }

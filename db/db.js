@@ -13,7 +13,7 @@ if (!fs.existsSync(dbPath)) {
 }
 
 const db = new sqlite3.Database(dbPath, (err) => {
-  if (err) return console.error("❌ เปิด DB ไม่ได้:", err.message);
+  if (err) return console.error(err.message);
 });
 
 db.serialize(() => {
@@ -35,15 +35,16 @@ db.serialize(() => {
     )
   `);
 
-  db.run(`
-    CREATE TABLE IF NOT EXISTS monthly_costs (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      month TEXT NOT NULL UNIQUE,  -- เช่น "2025-05"
-      cost_total INTEGER NOT NULL
-    )
-  `, () => {
-    console.log("✅ Tables created (if not exists)");
-  });
+db.run(`
+  CREATE TABLE IF NOT EXISTS monthly_costs (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    month TEXT NOT NULL,
+    cost_total INTEGER NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  )
+`, () => {
+  console.log("Tables created (if not exists)");
+});
 
   db.get("SELECT COUNT(*) AS count FROM products", (err, row) => {
     if (err) return console.error(err);
