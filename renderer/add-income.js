@@ -22,7 +22,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     try {
         products = await window.api.getProducts();
     } catch (err) {
-        console.error("❌ Failed to load products:", err);
+        console.error("Failed to load products:", err);
         showToast("โหลดข้อมูลสินค้าล้มเหลว");
         return;
     }
@@ -136,8 +136,8 @@ window.addEventListener("DOMContentLoaded", async () => {
 
             clearForm();
         } catch (err) {
-            console.error("❌ เกิดข้อผิดพลาดในการบันทึก:", err);
-            showToast("❌ เกิดข้อผิดพลาดในการบันทึก");
+            console.error("เกิดข้อผิดพลาดในการบันทึก:", err);
+            showToast("เกิดข้อผิดพลาดในการบันทึก");
         }
     });
 
@@ -200,7 +200,7 @@ window.addEventListener("DOMContentLoaded", async () => {
 
         if (totalEl) totalEl.textContent = `รวมทั้งหมด: ${totalMonth.toLocaleString()} บาท`;
 
-        // ✅ ใส่ตรงนี้เลย
+
         const deleteButtons = table.querySelectorAll('.delete-entry-btn');
         deleteButtons.forEach(btn => {
             btn.addEventListener('click', async () => {
@@ -213,8 +213,8 @@ window.addEventListener("DOMContentLoaded", async () => {
                     showToast("🗑 ลบรายการเรียบร้อย");
                     loadIncomeHistory(document.getElementById('month-filter').value);
                 } catch (err) {
-                    console.error("❌ ลบไม่สำเร็จ:", err);
-                    showToast("❌ ลบไม่สำเร็จ");
+                    console.error("ลบไม่สำเร็จ:", err);
+                    showToast("ลบไม่สำเร็จ");
                 }
             });
         });

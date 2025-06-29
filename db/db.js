@@ -4,9 +4,9 @@ const fs = require("fs");
 const { app } = require("electron");
 
 const dbFolder = app.getPath("userData");
-const dbPath = path.join(dbFolder, "app.db");
+const dbPath = path.join(dbFolder, "appDatabase.db");
 
-console.log("📂 Database path:", dbPath);
+console.log("Database path:", dbPath);
 
 if (!fs.existsSync(dbPath)) {
   fs.writeFileSync(dbPath, "");
@@ -49,12 +49,12 @@ db.run(`
   db.get("SELECT COUNT(*) AS count FROM products", (err, row) => {
     if (err) return console.error(err);
 
-    console.log("🧮 row products:", row.count);
+    console.log("row products:", row.count);
 
     if (row.count === 0) {
       db.run("INSERT INTO products (name, sell_price) VALUES (?, ?)", ["โค้ก", 25]);
       db.run("INSERT INTO products (name, sell_price) VALUES (?, ?)", ["น้ำเปล่า", 10], () => {
-        console.log("🥤 Mock product data added");
+        console.log("Mock product data added");
       });
     }
   });

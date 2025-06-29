@@ -25,7 +25,7 @@ function handleIpc(channel, handler) {
     try {
       return await handler(event, ...args);
     } catch (error) {
-      console.error(`❌ IPC Error on "${channel}":`, error.message || error);
+      console.error(`IPC Error on "${channel}":`, error.message || error);
       throw error;
     }
   });
